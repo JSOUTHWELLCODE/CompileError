@@ -53,28 +53,71 @@ public class MergeSort implements Algos {
     }
 
 
-    public ArrayList<Integer> Merge(ArrayList<Integer> dataset) {
-        int inputLength = dataset.size();
-        if (inputLength < 2) {
-            return null;
+    public static void merge(ArrayList<Integer> inputarraylist, ArrayList<Integer> lefthalf, ArrayList<Integer> righthalf) {
+        int leftsize = lefthalf.size();
+        int rightsize = righthalf.size();
+
+        int i = 0, j = 0, k = 0;
+
+        // Merge the two halves while both have elements
+        while (i < leftsize && j < rightsize) {
+            if (lefthalf.get(i) <= righthalf.get(j)) {
+                inputarraylist.set(k, lefthalf.get(i));
+                i++;
+            } else {
+                inputarraylist.set(k, righthalf.get(j));
+                j++;
+            }
+            k++;
         }
 
+        // Copy any remaining elements from lefthalf (if any)
+        while (i < leftsize) {
+            inputarraylist.set(k, lefthalf.get(i));
+            i++;
+            k++;
+        }
 
+        // Copy any remaining elements from righthalf (if any)
+        while (j < rightsize) {
+            inputarraylist.set(k, righthalf.get(j));
+            j++;
+            k++;
+        }
+    }
+    public ArrayList<Integer> MergeSort(ArrayList<Integer> dataset) {
+        int inputLength = dataset.size();
+        // If the dataset has 1 or fewer elements, it's already sorted
+        if (inputLength < 2) {
+            return dataset;
+        }
+
+        // Split the dataset into two halves
         int midindex = inputLength / 2;
+
+        //creates two arrays
         ArrayList<Integer> lefthalf = new ArrayList<>(midindex);
         ArrayList<Integer> righthalf = new ArrayList<>(inputLength - midindex);
 
-
+        // Fill lefthalf
         for (int i = 0; i < midindex; i++) {
             lefthalf.add(dataset.get(i));
-
         }
+
+        // Fill righthalf
         for (int i = midindex; i < inputLength; i++) {
             righthalf.add(dataset.get(i));
-
-
         }
-        return null;
 
+        // Recursively sort both halves
+        MergeSort(lefthalf);
+        MergeSort(righthalf);
+
+        // Merge the sorted halves back into the dataset
+        merge(dataset, lefthalf, righthalf);
+
+        return dataset;
     }
+
+
 }

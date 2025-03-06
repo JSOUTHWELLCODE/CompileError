@@ -25,11 +25,14 @@ public class Main {
 
 
         selectionSort selectionSort = new selectionSort();
+        MergeSort mergeSort = new MergeSort();
 
 
-        ArrayList<Integer> sorted = selectionSort.SelectionSort(data.getData());
+        ArrayList<Integer> sorted = mergeSort.MergeSort(data.getData());
 
         System.out.println(sorted);
+
+
 
     }
 }
