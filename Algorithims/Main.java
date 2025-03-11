@@ -28,9 +28,9 @@ public class Main {
         MergeSort mergeSort = new MergeSort();
 
 
-        ArrayList<Integer> sorted = mergeSort.MergeSort(data.getData());
+        //ArrayList<Integer> sorted = mergeSort.MergeSort(data.getData());
 
-        System.out.println(sorted);
+       // System.out.println(sorted);
 
 
 

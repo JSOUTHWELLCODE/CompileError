@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="Label1" prefHeight="506.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="your.JavaFXpackage.Controller">
+<AnchorPane fx:id="Label1" prefHeight="506.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFXpackage.Controller">
    <children>
       <ChoiceBox fx:id="mychoicebox1" layoutX="6.0" layoutY="194.0" prefWidth="150.0" />
       <Label fx:id="Algorithimlabel1" layoutX="6.0" layoutY="177.0" prefHeight="17.0" prefWidth="150.0" text="Select Algorithim 1" />
@@ -19,7 +19,7 @@
       <Label fx:id="Noelements" layoutX="6.0" layoutY="42.0" prefHeight="17.0" prefWidth="150.0" text="Number of elements " />
       <Label fx:id="Speed" layoutX="6.0" layoutY="119.0" prefHeight="17.0" prefWidth="150.0" text="Speed" />
       <Label layoutX="465.0" layoutY="42.0" prefHeight="17.0" prefWidth="150.0" text="Source Code" />
-      <HBox fx:id="HBOX1" layoutX="195.0" layoutY="42.0" prefHeight="100.0" prefWidth="200.0" spacing="5" />
+      <HBox fx:id="HBOX1" layoutX="195.0" layoutY="42.0" prefHeight="100.0" prefWidth="200.0"  />
       <Slider blockIncrement="5.0" layoutX="11.0" layoutY="59.0" max="50.0" showTickLabels="true" showTickMarks="true" />
       <Slider layoutX="11.0" layoutY="134.0" />
    </children>
