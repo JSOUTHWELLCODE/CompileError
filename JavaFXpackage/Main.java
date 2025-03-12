@@ -23,9 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             String css = this.getClass().getResource("/JavaFXpackage/application.css").toExternalForm();
             scene.getStylesheets().add(css);
-            VBox vbox = new VBox();
-            Rectangle rectangle = new Rectangle((double)10.0F, (double)10.0F, Color.BLUE);
-            vbox.getChildren().add(rectangle);
+
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
