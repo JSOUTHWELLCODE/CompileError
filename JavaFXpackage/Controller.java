@@ -195,7 +195,7 @@ public class Controller implements Initializable {
             xPosition2 += rect2.getWidth() * 5;
             xPosition3 += rect3.getWidth() * 5;
 
-            System.out.println("Rectangle " + i + ": " + rect2);
+
             HBOX1.getChildren().add(rect1);
             HBOX2.getChildren().add(rect2);
             HBOX3.getChildren().add(rect3);
