@@ -26,6 +26,8 @@ public class Main {
 
         selectionSort selectionSort = new selectionSort();
         MergeSort mergeSort = new MergeSort();
+        QuickSort quickSort = new QuickSort();
+        InsertionSort insertionSort = new InsertionSort();
 
 
         //ArrayList<Integer> sorted = mergeSort.MergeSort(data.getData());

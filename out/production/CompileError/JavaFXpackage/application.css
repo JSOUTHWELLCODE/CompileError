@@ -1,0 +1,37 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap');
+
+AnchorPane{
+-fx-font-family: 'Atkinson Hyperlegible Next", serif';
+
+
+}
+*/
+
+.root {
+-fx-font-family: "Lucida Console";
+}
+
+
+.label {
+-fx-font-family: "Lucida Console";
+
+
+}
+
+#visualize {
+-fx-background-color: #111111;
+-fx-text-fill: "white"
+
+}
+
+
+.choice-box{
+-fx-background-color: "white"
+}
+
+
+
+.scroll-bar{
+-fx-background-color: "white"
+}
+
