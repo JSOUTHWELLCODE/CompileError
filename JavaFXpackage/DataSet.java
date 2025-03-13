@@ -11,9 +11,18 @@ public class DataSet {
 
 
     public DataSet() {
-        generateData(30);
+        generateData(20);
 
     }
+
+
+    //when the user uses the slider
+    public DataSet(int size) {
+        generateData(size);
+
+    }
+
+
 
 
 
@@ -27,6 +36,7 @@ public class DataSet {
 
     // setters
     public void generateData(int value) {
+        data.clear();
         for (int i = 0; i < value; i++) {
             int randomNum = (int) (Math.random() * 50) +1 ;
             Rectangle rect = new Rectangle(3, randomNum *2, Color.BLACK);
@@ -53,6 +63,14 @@ public class DataSet {
 
     public int getarraySize() {
         return this.data.size();
+    }
+
+    public void modifyData(int size) {
+        if (size < 0) {
+            return;
+        }
+
+        generateData(size);
     }
 
 

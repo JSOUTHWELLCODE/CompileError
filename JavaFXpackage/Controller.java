@@ -17,6 +17,9 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -62,13 +65,22 @@ public class Controller implements Initializable {
     private HBox HBOX1;
 
     @FXML
+    private HBox HBOX2;
+
+
+    @FXML
+    private HBox HBOX3;
+
+    @FXML
+    private Slider Myslider;
+
+
+    @FXML
     private Button visualize;
 
 
-
-
-
-
+    @FXML
+    private ImageView Image1;
 
 
 
@@ -80,42 +92,25 @@ public class Controller implements Initializable {
         mychoicebox3.getItems().addAll(algos);
         DataSet data = new DataSet();
 
-        double xPosition = 0;
-        // ArrayList<Rectangle> Dataset = data.getArray();
+        fillhboxes(HBOX1,HBOX2,HBOX3, data.getData());
 
-        // Creates a new ArrayList of rectangles
-       // ArrayList<Rectangle> RectArray = new ArrayList<Rectangle>();
-
-        // Add rectangles to the list
-
-// Genrates the rectangles
-
-
-
-
-                int length = data.getData().size();
-
-                for (int i = 0; i < length; i++) {
-                    //  int sizerect = array.get(i);
-                    // Rectangle rect = new Rectangle(3, sizerect *2, Color.BLACK);
-
-                    Rectangle rect =  data.getArray().get(i);
-                    // Set initial position
-                    rect.setX(xPosition);
-                    rect.setY(0);
-
-                    // Add to the rectangle array
-                    //  RectArray.add(data.getArray().get(i));
+         // change the data when the slider has been changed
+        Myslider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+             int datasize = (int) Myslider.getValue();
+                data.modifyData(datasize);
+                //clear the current retangles
+                HBOX1.getChildren().clear();
+                HBOX2.getChildren().clear();
+                HBOX3.getChildren().clear();
 
 
 
+                fillhboxes(HBOX1,HBOX2,HBOX3, data.getData());
 
-                    // Update X position
-                    xPosition += rect.getWidth() * 5;
-
-                    // Add rectangle to HBox
-                    HBOX1.getChildren().add(rect);
-                }
+            }
+        });
 
 
 
@@ -124,12 +119,6 @@ public class Controller implements Initializable {
 
 
 
-
-
-        // Set alignment and spacing in the HBox
-        HBOX1.setScaleY(-1); // This flips the HBox vertically
-        HBOX1.layout();
-        HBOX1.setSpacing(4);// Ensure the layout is updated
 
 
 
@@ -140,10 +129,25 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
                 if (Objects.equals(newVal, "Bubble sort")) {
 
+                    Image bubblecode = new Image(getClass().getResourceAsStream("/Images/Bubble sort algorithim.png"));
+                    Image1.setImage(bubblecode);
+
+
+
+
+
+
+
+
                      visualize.setOnAction(new EventHandler<ActionEvent>() {
                         @Override public void handle(ActionEvent e) {
                             Bubblesort bubble = new Bubblesort();
                             bubble.Bubblerect(data.getArray(), HBOX1);
+                            bubble.Bubblerect(data.getArray(), HBOX2);
+                            bubble.Bubblerect(data.getArray(), HBOX3);
+
+
+
                         }
                     });
 
@@ -160,9 +164,55 @@ public class Controller implements Initializable {
 
 
     }
+    public void fillhboxes(HBox HBOX1, HBox HBOX2, HBox HBOX3, ArrayList<Rectangle> data) {
 
+        double xPosition1 = 0;
+        double xPosition2 = 0;
+        double xPosition3 = 0;
 
+        int length = data.size();
 
+        for (int i = 0; i < length; i++) {
+            Rectangle rect = data.get(i); // Get the original rectangle
+
+            // Create clones of the rectangle
+            Rectangle rect1 = new Rectangle(rect.getWidth(), rect.getHeight(), rect.getFill());
+            Rectangle rect2 = new Rectangle(rect.getWidth(), rect.getHeight(), rect.getFill());
+            Rectangle rect3 = new Rectangle(rect.getWidth(), rect.getHeight(), rect.getFill());
+
+            // Set initial position
+            rect1.setX(xPosition1);
+            rect1.setY(0);
+
+            rect2.setX(xPosition2);
+            rect2.setY(0);
+
+            rect3.setX(xPosition3);
+            rect3.setY(0);
+
+            // Update X position
+            xPosition1 += rect1.getWidth() * 5;
+            xPosition2 += rect2.getWidth() * 5;
+            xPosition3 += rect3.getWidth() * 5;
+
+            System.out.println("Rectangle " + i + ": " + rect2);
+            HBOX1.getChildren().add(rect1);
+            HBOX2.getChildren().add(rect2);
+            HBOX3.getChildren().add(rect3);
+        }
+
+        HBOX1.setScaleY(-1);
+        HBOX1.layout();
+        HBOX1.setSpacing(4);
+
+        HBOX2.setScaleY(-1);
+        HBOX2.layout();
+        HBOX2.setSpacing(4);
+
+        HBOX3.setScaleY(-1);
+        HBOX3.layout();
+        HBOX3.setSpacing(4);
+    }
 
 
 
