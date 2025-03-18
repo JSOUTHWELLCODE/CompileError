@@ -31,6 +31,11 @@ public class InsertionSort implements Algos {
         return null;
     }
 
+    @Override
+    public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
+        return null;
+    }
+
     public ArrayList<Integer> InsertionSort(ArrayList<Integer> dataset) {
         int length = dataset.size();
         for (int i = 1; i < length; i++) {
