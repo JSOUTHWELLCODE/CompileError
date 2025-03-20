@@ -2,7 +2,10 @@ package JavaFXpackage;
 
 
 import Algorithims.Algos;
-import Algorithims.Bubblesort;
+import Algorithims.*;
+
+
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -130,16 +133,23 @@ public class Controller implements Initializable {
 
 
 
-
-
-
-
                      visualize.setOnAction(new EventHandler<ActionEvent>() {
                         @Override public void handle(ActionEvent e) {
                             Bubblesort bubble = new Bubblesort();
-                            bubble.Bubblerect(data.getArray(), HBOX1);
-                            bubble.Bubblerect(data.getArray(), HBOX2);
-                            bubble.Bubblerect(data.getArray(), HBOX3);
+                            selectionSort selection = new selectionSort();
+                            InsertionSort insert = new InsertionSort();
+
+
+
+                            // need to make a copy of each list
+                            ArrayList<Rectangle> bubbleList1 = new ArrayList<>(data.getArray());
+                            ArrayList<Rectangle> insertionlist = new ArrayList<>(data.getArray());
+                            ArrayList<Rectangle> selectionList = new ArrayList<>(data.getArray());
+
+                            // Sort the copies
+                            bubble.Bubblerect(bubbleList1, HBOX1);
+                            insert.Insertionrect(insertionlist, HBOX2);
+                            selection.Selectionrect(selectionList, HBOX3);
 
 
 

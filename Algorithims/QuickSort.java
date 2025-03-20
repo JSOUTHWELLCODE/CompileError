@@ -1,5 +1,8 @@
 package Algorithims;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
+
 import java.util.ArrayList;
 
 public class QuickSort implements Algos {
@@ -34,6 +37,11 @@ public class QuickSort implements Algos {
     @Override
     public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
         return null;
+    }
+
+    @Override
+    public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) {
+
     }
 
     public ArrayList<Integer> QuickSort(ArrayList<Integer> dataset, int low, int high) {

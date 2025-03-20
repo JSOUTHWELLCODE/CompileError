@@ -1,5 +1,8 @@
 package Algorithims;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
+
 import java.util.ArrayList;
 
 public class MergeSort implements Algos {
@@ -49,6 +52,11 @@ public class MergeSort implements Algos {
             SwapValues(dataset, i, indexOfmin);
         }
         return dataset;
+
+    }
+
+    @Override
+    public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) {
 
     }
 

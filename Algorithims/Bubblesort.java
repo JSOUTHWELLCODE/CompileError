@@ -27,8 +27,13 @@ public class Bubblesort implements Algos {
                         pause.setOnFinished(event -> bubbleSortStep(list, HBOX1, i, j + 1));
                         pause.play();
                     });
+
+
+
+
+
                 } else {
-                    PauseTransition pause = new PauseTransition(Duration.millis(25));
+                    PauseTransition pause = new PauseTransition(Duration.millis(10));
                     pause.setOnFinished(event -> bubbleSortStep(list, HBOX1, i, j + 1));
                     pause.play();
                 }
