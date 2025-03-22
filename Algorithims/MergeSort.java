@@ -1,7 +1,12 @@
 package Algorithims;
 
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -19,113 +24,112 @@ public class MergeSort implements Algos {
     }
 
     @Override
-    public ArrayList<Integer> SubArrays(ArrayList<Integer> Dataset) {
-       return null;
-
-
-    }
-
-    @Override
-    public ArrayList<Integer> SubArrays() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Integer> Subdeck(ArrayList<Integer> Dataset) {
-        return null;
-    }
-
-
-    @Override
     public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
-        int length = dataset.size();
+        return null;
+    }
 
-        for (int i = 0; i < length; i++) {
-            int min = dataset.get(i);
-            int indexOfmin = i;
-            for (int j = i + 1; j < length; j++) {
-                if (dataset.get(j) < min) {
-                    min = dataset.get(j);
-                    indexOfmin = j;
-                }
-            }
-            SwapValues(dataset, i, indexOfmin);
+
+    public void MergeSortRect(ArrayList<Rectangle> list, HBox HBOX1) {
+        MergeSortStep(list, HBOX1, 0, list.size() - 1, null);
+    }
+
+    private void MergeSortStep(ArrayList<Rectangle> list, HBox HBOX1, int low, int high, Runnable onFinished) {
+        if (low < high) {
+            int mid = (low + high) / 2;
+            MergeSortStep(list, HBOX1, low, mid, () -> {
+                MergeSortStep(list, HBOX1, mid + 1, high, () -> {
+                    Merge(list, HBOX1, low, mid, high, onFinished);
+                });
+            });
+        } else if (onFinished != null) {
+            onFinished.run();
         }
-        return dataset;
-
     }
 
-    @Override
-    public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) {
+    private void Merge(ArrayList<Rectangle> list, HBox HBOX1, int low, int mid, int high, Runnable onFinished) {
+        ArrayList<Rectangle> temp = new ArrayList<>();
+        int i = low;
+        int j = mid + 1;
 
-    }
-
-
-    public static void merge(ArrayList<Integer> inputarraylist, ArrayList<Integer> lefthalf, ArrayList<Integer> righthalf) {
-        int leftsize = lefthalf.size();
-        int rightsize = righthalf.size();
-
-        int i = 0, j = 0, k = 0;
-
-        // Merge the two halves while both have elements
-        while (i < leftsize && j < rightsize) {
-            if (lefthalf.get(i) <= righthalf.get(j)) {
-                inputarraylist.set(k, lefthalf.get(i));
+        while (i <= mid && j <= high) {
+            if (list.get(i).getHeight() <= list.get(j).getHeight()) {
+                temp.add(list.get(i));
                 i++;
             } else {
-                inputarraylist.set(k, righthalf.get(j));
+                temp.add(list.get(j));
                 j++;
             }
-            k++;
         }
 
-        // Copy any remaining elements from lefthalf (if any)
-        while (i < leftsize) {
-            inputarraylist.set(k, lefthalf.get(i));
+        while (i <= mid) {
+            temp.add(list.get(i));
             i++;
-            k++;
         }
 
-        // Copy any remaining elements from righthalf (if any)
-        while (j < rightsize) {
-            inputarraylist.set(k, righthalf.get(j));
+        while (j <= high) {
+            temp.add(list.get(j));
             j++;
-            k++;
-        }
-    }
-    public ArrayList<Integer> MergeSort(ArrayList<Integer> dataset) {
-        int inputLength = dataset.size();
-        // If the dataset has 1 or fewer elements, it's already sorted
-        if (inputLength < 2) {
-            return dataset;
         }
 
-        // Split the dataset into two halves
-        int midindex = inputLength / 2;
+        SequentialTransition mergeAnimation = new SequentialTransition();
 
-        //creates two arrays
-        ArrayList<Integer> lefthalf = new ArrayList<>(midindex);
-        ArrayList<Integer> righthalf = new ArrayList<>(inputLength - midindex);
+        for (int k = 0; k < temp.size(); k++) {
+            final int index = k;
+            PauseTransition pause = new PauseTransition(Duration.millis(10));
 
-        // Fill lefthalf
-        for (int i = 0; i < midindex; i++) {
-            lefthalf.add(dataset.get(i));
+            pause.setOnFinished(event -> {
+                list.set(low + index, temp.get(index));
+                SwapAnimation(list, low + index, low + index, HBOX1, null);
+            });
+
+            mergeAnimation.getChildren().add(pause);
         }
-
-        // Fill righthalf
-        for (int i = midindex; i < inputLength; i++) {
-            righthalf.add(dataset.get(i));
-        }
-
-        // Recursively sort both halves
-        MergeSort(lefthalf);
-        MergeSort(righthalf);
-
-        // Merge the sorted halves back into the dataset
-        merge(dataset, lefthalf, righthalf);
-
-        return dataset;
+        mergeAnimation.setOnFinished(event -> {
+            if (onFinished != null) {
+                onFinished.run();
+            }
+        });
+        mergeAnimation.play();
     }
 
+    public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) {
+        Rectangle rectI = list.get(i);
+        Rectangle rectJ = list.get(j);
 
+        double rectIStartX = rectI.getX();
+        double rectJStartX = rectJ.getX();
+
+        TranslateTransition translateI = new TranslateTransition(Duration.seconds(0.05), rectI);
+        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(0.05), rectJ);
+
+        double moveIByX = rectJStartX - rectIStartX;
+        double moveJByX = rectIStartX - rectJStartX;
+
+        translateI.setByX(moveIByX);
+        translateJ.setByX(moveJByX);
+
+        SequentialTransition sequentialTransition = new SequentialTransition(translateI, translateJ);
+
+        sequentialTransition.setOnFinished(event -> {
+            HBOX1.getChildren().clear();
+            for (Rectangle rect : list) {
+                Rectangle newRect = new Rectangle(3, rect.getHeight(), Color.BLACK);
+                newRect.setX(rect.getX());
+                HBOX1.getChildren().add(newRect);
+            }
+            HBOX1.layout();
+            if (onFinished != null) {
+                onFinished.run();
+            }
+        });
+        if (i == j){
+            translateI.setByX(0);
+            translateJ.setByX(0);
+            sequentialTransition.play();
+        } else {
+            sequentialTransition.play();
+        }
+    }
 }
+
+

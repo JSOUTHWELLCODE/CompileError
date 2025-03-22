@@ -33,21 +33,8 @@ public class selectionSort implements Algos {
         return 0;
     }
 
-    @Override
-    public ArrayList<Integer> SubArrays(ArrayList<Integer> Dataset) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Integer> SubArrays() {
-        return null;
-    }
 
 
-    @Override
-    public ArrayList<Integer> Subdeck(ArrayList<Integer> Dataset) {
-        return null;
-    }
 
 
     public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
@@ -145,27 +132,6 @@ public class selectionSort implements Algos {
     public void Selectionrect(ArrayList<Rectangle> list, HBox HBOX1) {
         SelectionSortStep(list, HBOX1, 0, 1, 0);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

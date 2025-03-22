@@ -82,6 +82,8 @@ public class Controller implements Initializable {
 
 
 
+
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -115,13 +117,6 @@ public class Controller implements Initializable {
 
 
 
-
-
-
-
-
-
-
         mychoicebox1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
@@ -138,18 +133,24 @@ public class Controller implements Initializable {
                             Bubblesort bubble = new Bubblesort();
                             selectionSort selection = new selectionSort();
                             InsertionSort insert = new InsertionSort();
+                            QuickSort quicky = new QuickSort();
+                            MergeSort merge = new MergeSort();
 
 
 
                             // need to make a copy of each list
                             ArrayList<Rectangle> bubbleList1 = new ArrayList<>(data.getArray());
                             ArrayList<Rectangle> insertionlist = new ArrayList<>(data.getArray());
-                            ArrayList<Rectangle> selectionList = new ArrayList<>(data.getArray());
+                            ArrayList<Rectangle> quicklist = new ArrayList<>(data.getArray());
 
                             // Sort the copies
                             bubble.Bubblerect(bubbleList1, HBOX1);
                             insert.Insertionrect(insertionlist, HBOX2);
-                            selection.Selectionrect(selectionList, HBOX3);
+                            //quicky.QuickSortRect(quicklist, HBOX3);
+                            merge.MergeSortRect(quicklist, HBOX3);
+
+
+                            //selection.Selectionrect (selectionList, HBOX3);
 
 
 

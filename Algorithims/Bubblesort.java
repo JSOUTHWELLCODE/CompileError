@@ -94,20 +94,6 @@ public class Bubblesort implements Algos {
         return 0;
     }
 
-    @Override
-    public ArrayList<Integer> SubArrays(ArrayList<Integer> Dataset) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Integer> SubArrays() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Integer> Subdeck(ArrayList<Integer> Dataset) {
-        return null;
-    }
 
     @Override
     public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
