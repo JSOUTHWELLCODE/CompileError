@@ -75,7 +75,7 @@ public class MergeSort implements Algos {
 
         for (int k = 0; k < temp.size(); k++) {
             final int index = k;
-            PauseTransition pause = new PauseTransition(Duration.millis(10));
+            PauseTransition pause = new PauseTransition(Duration.millis(20));
 
             pause.setOnFinished(event -> {
                 list.set(low + index, temp.get(index));
