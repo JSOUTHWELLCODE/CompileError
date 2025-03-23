@@ -24,12 +24,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class Controller implements Initializable {
+    private Map<String, String> imageMap;
+
+
+
 
 
 
@@ -57,7 +59,7 @@ public class Controller implements Initializable {
     private ChoiceBox<String> mychoicebox3;
 
 
-    private String[] algos = {"Merge Sort", "Insertion Sort",  "Bubble sort"};
+    private String[] algos = {"Bubble Sort" ,"Insertion Sort", "Selection Sort", "Quick Sort", "Merge Sort"};
 
     @FXML
     private HBox HBOX1;
@@ -80,6 +82,23 @@ public class Controller implements Initializable {
     @FXML
     private ImageView Image1;
 
+    @FXML
+    private ImageView Image2;
+
+    @FXML
+    private ImageView Image3;
+
+
+
+
+
+    Bubblesort bubble = new Bubblesort();
+    selectionSort selection = new selectionSort();
+    InsertionSort insert = new InsertionSort();
+    QuickSort quicky = new QuickSort();
+    MergeSort merge = new MergeSort();
+    DataSet data = new DataSet();
+
 
 
 
@@ -90,7 +109,7 @@ public class Controller implements Initializable {
         mychoicebox1.getItems().addAll(algos);
         mychoicebox2.getItems().addAll(algos);
         mychoicebox3.getItems().addAll(algos);
-        DataSet data = new DataSet();
+
 
         fillhboxes(HBOX1,HBOX2,HBOX3, data.getData());
 
@@ -112,60 +131,74 @@ public class Controller implements Initializable {
             }
         });
 
+        imageMap = new HashMap<String, String>();
+        imageMap.put("Bubble Sort", "/Images/Bubble sort algorithim.png");
+        imageMap.put("Insertion Sort", "/Images/InsertionSort.png");
+        imageMap.put("Selection Sort", "/Images/SelectionSort.png");
+
+        // Change listener for the choiboxes adds the image map when the user selects the appropriate choice
+        ChangeListener<String> changeListener1 = (observableValue, oldVal, newVal) -> {
+            if (newVal != null && imageMap.containsKey(newVal)) {
+                Image image = new Image(getClass().getResourceAsStream(imageMap.get(newVal)));
+                Image1.setImage(image);
+            }
+        };
 
 
 
+        ChangeListener<String> changeListener2 = (observableValue, oldVal, newVal) -> {
+            if (newVal != null && imageMap.containsKey(newVal)) {
+                Image image = new Image(getClass().getResourceAsStream(imageMap.get(newVal)));
+                Image2.setImage(image);
+            }
+        };
 
 
-        mychoicebox1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        ChangeListener<String> changeListener3 = (observableValue, oldVal, newVal) -> {
+            if (newVal != null && imageMap.containsKey(newVal)) {
+                Image image = new Image(getClass().getResourceAsStream(imageMap.get(newVal)));
+                Image3.setImage(image);
+            }
+        };
+
+        mychoicebox1.getSelectionModel().selectedItemProperty().addListener(changeListener1);
+        mychoicebox2.getSelectionModel().selectedItemProperty().addListener(changeListener2);
+        mychoicebox3.getSelectionModel().selectedItemProperty().addListener(changeListener3);
+
+
+
+        visualize.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldVal, String newVal) {
-                if (Objects.equals(newVal, "Bubble sort")) {
+            public void handle(ActionEvent event) {
+                String algorithm1 = mychoicebox1.getValue();
+                String algorithm2 = mychoicebox2.getValue();
+                String algorithm3 = mychoicebox3.getValue();
 
-                    Image bubblecode = new Image(getClass().getResourceAsStream("/Images/Bubble sort algorithim.png"));
-                    Image1.setImage(bubblecode);
-
-
-
-
-                     visualize.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override public void handle(ActionEvent e) {
-                            Bubblesort bubble = new Bubblesort();
-                            selectionSort selection = new selectionSort();
-                            InsertionSort insert = new InsertionSort();
-                            QuickSort quicky = new QuickSort();
-                            MergeSort merge = new MergeSort();
-
-
-
-                            // need to make a copy of each list
-                            ArrayList<Rectangle> bubbleList1 = new ArrayList<>(data.getArray());
-                            ArrayList<Rectangle> insertionlist = new ArrayList<>(data.getArray());
-                            ArrayList<Rectangle> quicklist = new ArrayList<>(data.getArray());
-
-                            // Sort the copies
-                            bubble.Bubblerect(bubbleList1, HBOX1);
-                            insert.Insertionrect(insertionlist, HBOX2);
-                            //quicky.QuickSortRect(quicklist, HBOX3);
-                            merge.MergeSortRect(quicklist, HBOX3);
-
-
-                            //selection.Selectionrect (selectionList, HBOX3);
-
-
-
-                        }
-                    });
-
-
-
-
-
-
-                    // Call the sorting method
+                if (algorithm1 != null) {
+                    visualizeAlgorithm(algorithm1, HBOX1);
+                }
+                if (algorithm2 != null) {
+                    visualizeAlgorithm(algorithm2, HBOX2);
+                }
+                if (algorithm3 != null) {
+                    visualizeAlgorithm(algorithm3, HBOX3);
                 }
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -218,6 +251,32 @@ public class Controller implements Initializable {
         HBOX3.setScaleY(-1);
         HBOX3.layout();
         HBOX3.setSpacing(4);
+    }
+
+
+
+    public void visualizeAlgorithm(String algorithm, HBox hbox) {
+        ArrayList<Rectangle> list = new ArrayList<>(data.getArray());
+
+        switch (algorithm) {
+            case "Bubble Sort":
+                bubble.Bubblerect(list, hbox);
+                break;
+            case "Insertion Sort":
+                insert.Insertionrect(list, hbox);
+                break;
+            case "Quick Sort":
+                quicky.QuickSortRect(list, hbox);
+                break;
+            case "Merge Sort":
+                merge.MergeSortRect(list, hbox);
+                break;
+            case "Selection Sort":
+                selection.Selectionrect(list, hbox);
+                break;
+            default:
+                System.out.println("Unknown algorithm.");
+        }
     }
 
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="Label1" prefHeight="506.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFXpackage.Controller">
+<AnchorPane fx:id="Label1" prefHeight="506.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFXpackage.Controller">
    <children>
       <ChoiceBox fx:id="mychoicebox1" layoutX="6.0" layoutY="194.0" prefWidth="150.0" />
       <Label fx:id="Algorithimlabel1" layoutX="6.0" layoutY="177.0" prefHeight="17.0" prefWidth="150.0" text="Select Algorithim 1" />
@@ -20,11 +20,13 @@
       <Label fx:id="Noelements" layoutX="6.0" layoutY="42.0" prefHeight="17.0" prefWidth="150.0" text="Number of elements " />
       <Label fx:id="Speed" layoutX="6.0" layoutY="119.0" prefHeight="17.0" prefWidth="150.0" text="Speed" />
       <Label layoutX="465.0" layoutY="42.0" prefHeight="17.0" prefWidth="150.0" text="Source Code" />
-      <HBox fx:id="HBOX1" layoutX="170.0" layoutY="47.0" prefHeight="100.0" prefWidth="200.0" />
+      <HBox fx:id="HBOX1" layoutX="176.0" layoutY="43.0" prefHeight="109.0" prefWidth="200.0" />
       <Slider fx:id="Myslider" blockIncrement="5.0" layoutX="11.0" layoutY="59.0" majorTickUnit="20.0" max="40.0" showTickLabels="true" showTickMarks="true" />
       <Slider fx:id="myslider" layoutX="11.0" layoutY="134.0" />
-      <HBox fx:id="HBOX2" layoutX="170.0" layoutY="157.0" prefHeight="100.0" prefWidth="200.0" />
-      <HBox fx:id="HBOX3" layoutX="170.0" layoutY="297.0" prefHeight="100.0" prefWidth="200.0" />
-      <ImageView fx:id="Image1" fitHeight="150.0" fitWidth="200.0" layoutX="473.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox fx:id="HBOX2" layoutX="176.0" layoutY="157.0" prefHeight="109.0" prefWidth="200.0" />
+      <HBox fx:id="HBOX3" layoutX="176.0" layoutY="306.0" prefHeight="109.0" prefWidth="200.0" />
+      <ImageView fx:id="Image1" fitHeight="150.0" fitWidth="200.0" layoutX="491.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="Image2" fitHeight="150.0" fitWidth="200.0" layoutX="491.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="Image3" fitHeight="150.0" fitWidth="200.0" layoutX="491.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
