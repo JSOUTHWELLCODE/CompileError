@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class selectionSort implements Algos {
+    private double speed = 0.25;
 
 
     @Override
@@ -63,8 +64,8 @@ public class selectionSort implements Algos {
         double rectIStartX = rectI.getX();
         double rectJStartX = rectJ.getX();
 
-        TranslateTransition translateI = new TranslateTransition(Duration.seconds(0.05), rectI);
-        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(0.05), rectJ);
+        TranslateTransition translateI = new TranslateTransition(Duration.seconds(this.speed), rectI);
+        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(this.speed), rectJ);
 
         double moveIByX = rectJStartX - rectIStartX;
         double moveJByX = rectIStartX - rectJStartX;
@@ -107,14 +108,14 @@ public class selectionSort implements Algos {
                 if (list.get(j).getHeight() < list.get(minIndex).getHeight()) {
                     minIndex = j; // Update minIndex if a smaller element is found
                 }
-                PauseTransition pause = new PauseTransition(Duration.millis(10));
+                PauseTransition pause = new PauseTransition(Duration.millis(5));
                 int finalMinIndex = minIndex;
                 pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i, j + 1, finalMinIndex));
                 pause.play();
             } else { // Inner loop finished, perform swap
                 if (minIndex != i) { // Only swap if minIndex has changed
                     SwapAnimation(list, i, minIndex, HBOX1, () -> {
-                        PauseTransition pause = new PauseTransition(Duration.millis(10));
+                        PauseTransition pause = new PauseTransition(Duration.millis(5));
                         pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i + 1, i + 2, i + 1));
                         pause.play();
                     });
@@ -133,6 +134,13 @@ public class selectionSort implements Algos {
         SelectionSortStep(list, HBOX1, 0, 1, 0);
     }
 
+
+    public void SetSpeed(double inputspeed ){
+
+        double constant = 0.1;
+        this.speed = constant / inputspeed;
+
+    }
 
 
 

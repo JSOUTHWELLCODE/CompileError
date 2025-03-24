@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class QuickSort implements Algos {
+    private double speed = 0.25;
+
+
+
 
     public void QuickSortRect(ArrayList<Rectangle> list, HBox HBOX1) { // Public method to start QuickSort visualization
         QuickSortStep(list, HBOX1, 0, list.size() - 1, null); // Calls recursive QuickSortStep with initial parameters
@@ -83,8 +87,8 @@ public class QuickSort implements Algos {
         double rectIStartX = rectI.getX(); // Gets the initial X-coordinate of rectangle i
         double rectJStartX = rectJ.getX(); // Gets the initial X-coordinate of rectangle j
 
-        TranslateTransition translateI = new TranslateTransition(Duration.seconds(0.05), rectI); // Creates a translation animation for rectangle i
-        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(0.05), rectJ); // Creates a translation animation for rectangle j
+        TranslateTransition translateI = new TranslateTransition(Duration.seconds(this.speed), rectI); // Creates a translation animation for rectangle i
+        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(this.speed), rectJ); // Creates a translation animation for rectangle j
 
         double moveIByX = rectJStartX - rectIStartX; // Calculates the distance rectangle i needs to move
         double moveJByX = rectIStartX - rectJStartX; // Calculates the distance rectangle j needs to move
@@ -109,4 +113,16 @@ public class QuickSort implements Algos {
 
         sequentialTransition.play(); // Starts the animation
     }
+
+
+    public void SetSpeed(double inputspeed ){
+
+        double constant = 0.1;
+        this.speed = constant / inputspeed;
+
+    }
+
+
+
+
 }

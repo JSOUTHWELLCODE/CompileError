@@ -3,6 +3,8 @@ package Algorithims;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -11,6 +13,11 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class Bubblesort implements Algos {
+    private double speed = 0.25;
+
+
+
+    private boolean AnimationRunning;
 
     public void Bubblerect(ArrayList<Rectangle> list, HBox HBOX1) {
         int n = list.size();
@@ -44,14 +51,17 @@ public class Bubblesort implements Algos {
     }
 
     public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) {
+
+
+
         Rectangle rectI = list.get(i);
         Rectangle rectJ = list.get(j);
 
         double rectIStartX = rectI.getX();
         double rectJStartX = rectJ.getX();
 
-        TranslateTransition translateI = new TranslateTransition(Duration.seconds(0.05), rectI);
-        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(0.05), rectJ);
+        TranslateTransition translateI = new TranslateTransition(Duration.seconds(this.speed), rectI);
+        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(this.speed), rectJ);
 
         double moveIByX = rectJStartX - rectIStartX;
         double moveJByX = rectIStartX - rectJStartX;
@@ -78,7 +88,9 @@ public class Bubblesort implements Algos {
             HBOX1.layout();
             if (onFinished != null) {
                 onFinished.run();
+
             }
+
         });
 
         parallelTransition.play();
@@ -99,6 +111,34 @@ public class Bubblesort implements Algos {
     public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
         return null;
     }
+
+
+
+    public void SetSpeed(double inputspeed ){
+
+        double constant = 0.1;
+        this.speed = constant / inputspeed;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 public class InsertionSort implements Algos {
+    private double speed = 0.25;
 
     @Override
     public void SwapValues(ArrayList<Integer> list, int i, int j) {
@@ -38,8 +39,8 @@ public class InsertionSort implements Algos {
         double rectIStartX = rectI.getX();
         double rectJStartX = rectJ.getX();
 
-        TranslateTransition translateI = new TranslateTransition(Duration.seconds(0.05), rectI);
-        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(0.05), rectJ);
+        TranslateTransition translateI = new TranslateTransition(Duration.seconds(this.speed), rectI);
+        TranslateTransition translateJ = new TranslateTransition(Duration.seconds(this.speed), rectJ);
 
         double moveIByX = rectJStartX - rectIStartX;
         double moveJByX = rectIStartX - rectJStartX;
@@ -103,12 +104,12 @@ public class InsertionSort implements Algos {
             if (j > 0 && list.get(j).getHeight() < list.get(j - 1).getHeight()) {
                 int finalJ = j;
                 SwapAnimation(list, j, j - 1, HBOX1, () -> {
-                    PauseTransition pause = new PauseTransition(Duration.millis(10));
+                    PauseTransition pause = new PauseTransition(Duration.millis(5));
                     pause.setOnFinished(event -> InsertionSortStep(list, HBOX1, finalJ - 1));
                     pause.play();
                 });
             } else {
-                PauseTransition pause = new PauseTransition(Duration.millis(10));
+                PauseTransition pause = new PauseTransition(Duration.millis(5));
                 pause.setOnFinished(event -> InsertionSortStep(list, HBOX1, i + 1));
                 pause.play();
             }
@@ -117,10 +118,12 @@ public class InsertionSort implements Algos {
 
 
 
+    public void SetSpeed(double inputspeed ){
 
+        double constant = 0.1;
+        this.speed = constant / inputspeed;
 
-
-
+    }
 
 
 

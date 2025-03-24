@@ -5,7 +5,9 @@ import Algorithims.Algos;
 import Algorithims.*;
 
 
-
+import javafx.animation.PauseTransition;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -23,6 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
+
 import java.net.URL;
 import java.util.*;
 
@@ -74,6 +78,9 @@ public class Controller implements Initializable {
     @FXML
     private Slider Myslider;
 
+    @FXML
+    private Slider speedslider;
+
 
     @FXML
     private Button visualize;
@@ -110,6 +117,8 @@ public class Controller implements Initializable {
         mychoicebox2.getItems().addAll(algos);
         mychoicebox3.getItems().addAll(algos);
 
+       // Set initial high value
+
 
         fillhboxes(HBOX1,HBOX2,HBOX3, data.getData());
 
@@ -124,17 +133,36 @@ public class Controller implements Initializable {
                 HBOX2.getChildren().clear();
                 HBOX3.getChildren().clear();
 
-
-
                 fillhboxes(HBOX1,HBOX2,HBOX3, data.getData());
 
             }
         });
 
+        speedslider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+                double dataspeed = (double) speedslider.getValue();
+                quicky.SetSpeed(dataspeed);
+                merge.SetSpeed(dataspeed);
+                bubble.SetSpeed(dataspeed);
+                insert.SetSpeed(dataspeed);
+                bubble.SetSpeed(dataspeed);
+                selection.SetSpeed(dataspeed);
+
+
+
+            }
+        });
+
+
+
         imageMap = new HashMap<String, String>();
         imageMap.put("Bubble Sort", "/Images/Bubble sort algorithim.png");
         imageMap.put("Insertion Sort", "/Images/InsertionSort.png");
         imageMap.put("Selection Sort", "/Images/SelectionSort.png");
+        imageMap.put("Quick Sort", "/Images/QuickSort.png");
+
+
 
         // Change listener for the choiboxes adds the image map when the user selects the appropriate choice
         ChangeListener<String> changeListener1 = (observableValue, oldVal, newVal) -> {
@@ -174,6 +202,15 @@ public class Controller implements Initializable {
                 String algorithm2 = mychoicebox2.getValue();
                 String algorithm3 = mychoicebox3.getValue();
 
+                // Disable UI
+                visualize.setDisable(true);
+                mychoicebox1.setDisable(true);
+                mychoicebox2.setDisable(true);
+                mychoicebox3.setDisable(true);
+                Myslider.setDisable(true);
+                speedslider.setDisable(true);
+                // Disable sliders and other relevant UI elements
+
                 if (algorithm1 != null) {
                     visualizeAlgorithm(algorithm1, HBOX1);
                 }
@@ -183,26 +220,25 @@ public class Controller implements Initializable {
                 if (algorithm3 != null) {
                     visualizeAlgorithm(algorithm3, HBOX3);
                 }
+
+                // Re-enable UI after a fixed delay
+                PauseTransition enableUI = new PauseTransition(Duration.seconds(15)); // Adjust delay as needed
+                enableUI.setOnFinished(event1 -> {
+                    visualize.setDisable(false);
+                    mychoicebox1.setDisable(false);
+                    mychoicebox2.setDisable(false);
+                    mychoicebox3.setDisable(false);
+                    Myslider.setDisable(false);
+                    speedslider.setDisable(false);
+                    // Re-enable sliders and other UI elements
+                });
+                enableUI.play();
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+    //fills all three hboxes
     public void fillhboxes(HBox HBOX1, HBox HBOX2, HBox HBOX3, ArrayList<Rectangle> data) {
 
         double xPosition1 = 0;
@@ -278,6 +314,10 @@ public class Controller implements Initializable {
                 System.out.println("Unknown algorithm.");
         }
     }
+
+
+
+
 
 
 
