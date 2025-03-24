@@ -30,6 +30,10 @@ public class InsertionSort implements Algos {
     public ArrayList<Integer> Subdeck(ArrayList<Integer> Dataset) {
         return null;
     }
+    @Override
+    public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
+        return dataset;
+    }
 
     public ArrayList<Integer> InsertionSort(ArrayList<Integer> dataset) {
         int length = dataset.size();

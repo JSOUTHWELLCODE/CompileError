@@ -30,6 +30,10 @@ public class QuickSort implements Algos {
     public ArrayList<Integer> Subdeck(ArrayList<Integer> Dataset) {
         return null;
     }
+    @Override
+    public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
+        return dataset;
+    }
 
     public ArrayList<Integer> QuickSort(ArrayList<Integer> dataset, int low, int high) {
         if (low < high) {
