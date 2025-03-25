@@ -202,7 +202,7 @@ public class Controller implements Initializable {
                 String algorithm2 = mychoicebox2.getValue();
                 String algorithm3 = mychoicebox3.getValue();
 
-                // Disable UI
+                // Disable UI need to add in a null checker
                 visualize.setDisable(true);
                 mychoicebox1.setDisable(true);
                 mychoicebox2.setDisable(true);
@@ -296,7 +296,7 @@ public class Controller implements Initializable {
 
         switch (algorithm) {
             case "Bubble Sort":
-                bubble.Bubblerect(list, hbox);
+                bubble.BubbleRect(list, hbox);
                 break;
             case "Insertion Sort":
                 insert.Insertionrect(list, hbox);

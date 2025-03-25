@@ -19,11 +19,19 @@ public class QuickSort implements Algos {
 
 
 
-    public void QuickSortRect(ArrayList<Rectangle> list, HBox HBOX1) { // Public method to start QuickSort visualization
-        QuickSortStep(list, HBOX1, 0, list.size() - 1, null); // Calls recursive QuickSortStep with initial parameters
+    public void QuickSortRect(ArrayList<Rectangle> list, HBox HBOX1) {
+        long startTime = System.nanoTime();
+        QuickSortStep(list, HBOX1, 0, list.size() - 1, () -> {
+            long endTime = System.nanoTime();
+            long executionTime = (endTime - startTime) / 1000000;
+            System.out.println("Quick Sort takes " + executionTime + " ms to execute." + " " +"BIG O   best case = O(n log n)  worst case = O(n²)");
+        });
     }
 
     private void QuickSortStep(ArrayList<Rectangle> list, HBox HBOX1, int low, int high, Runnable onFinished) { // Recursive method for QuickSort steps
+
+
+
         if (low < high) { // Checks if the partition needs sorting
             PartitionStep(list, HBOX1, low, high, () -> { // Calls PartitionStep with a Runnable for the next step
                 int pivotIndex = Partition(list, low, high, HBOX1, null); // Partitions the list and gets the pivot index
@@ -34,6 +42,9 @@ public class QuickSort implements Algos {
         } else if (onFinished != null) { // If the partition is sorted, and there's an onFinished Runnable
             onFinished.run(); // Runs the onFinished Runnable
         }
+
+
+
     }
 
     private void PartitionStep(ArrayList<Rectangle> list, HBox HBOX1, int low, int high, Runnable onFinished) { // Method to call Partition and handle the next step
@@ -68,10 +79,7 @@ public class QuickSort implements Algos {
 
     }
 
-    @Override
-    public int indexLowest() {
-        return 0;
-    }
+
 
 
 

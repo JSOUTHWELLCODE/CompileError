@@ -10,7 +10,6 @@ public interface Algos {
 
     void SwapValues(ArrayList<Integer> list, int i, int j);
 
-    int indexLowest();
 
 
     ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset);

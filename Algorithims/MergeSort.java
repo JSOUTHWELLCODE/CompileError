@@ -22,10 +22,7 @@ public class MergeSort implements Algos {
 
     }
 
-    @Override
-    public int indexLowest() {
-        return 0;
-    }
+
 
     @Override
     public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
@@ -34,19 +31,26 @@ public class MergeSort implements Algos {
 
 
     public void MergeSortRect(ArrayList<Rectangle> list, HBox HBOX1) {
-        MergeSortStep(list, HBOX1, 0, list.size() - 1, null);
+        long startTime = System.nanoTime();
+        mergeSortStep(list, HBOX1, 0, list.size() - 1, () -> {
+            long endTime = System.nanoTime();
+            long executionTime = (endTime - startTime) / 1000000;
+            System.out.println("Merge Sort takes " + executionTime + " ms to execute." + " " + "Best Case: O(n log n)" + " Worst Case: O(n log n))" );
+        });
     }
 
-    private void MergeSortStep(ArrayList<Rectangle> list, HBox HBOX1, int low, int high, Runnable onFinished) {
+    private void mergeSortStep(ArrayList<Rectangle> list, HBox HBOX1, int low, int high, Runnable onFinished) {
         if (low < high) {
             int mid = (low + high) / 2;
-            MergeSortStep(list, HBOX1, low, mid, () -> {
-                MergeSortStep(list, HBOX1, mid + 1, high, () -> {
+            mergeSortStep(list, HBOX1, low, mid, () -> {
+                mergeSortStep(list, HBOX1, mid + 1, high, () -> {
                     Merge(list, HBOX1, low, mid, high, onFinished);
                 });
             });
-        } else if (onFinished != null) {
-            onFinished.run();
+        } else {
+            if (onFinished != null) {
+                onFinished.run();
+            }
         }
     }
 

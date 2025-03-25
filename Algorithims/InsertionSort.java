@@ -20,10 +20,7 @@ public class InsertionSort implements Algos {
         list.set(j, temp);
     }
 
-    @Override
-    public int indexLowest() {
-        return 0;
-    }
+
 
 
     @Override
@@ -92,11 +89,18 @@ public class InsertionSort implements Algos {
 
 
 
+
+
     public void Insertionrect(ArrayList<Rectangle> list, HBox HBOX1) {
-        InsertionSortStep(list, HBOX1, 1);
+        long startTime = System.nanoTime();
+        InsertionSortStep(list, HBOX1, 1, () -> {
+            long endTime = System.nanoTime();
+            long executionTime = (endTime - startTime) / 1000000;
+            System.out.println("Insertion Sort takes " + executionTime + " ms to execute." + " " + "BIG O = O(n²)");
+        });
     }
 
-    private void InsertionSortStep(ArrayList<Rectangle> list, HBox HBOX1, int i) {
+    private void InsertionSortStep(ArrayList<Rectangle> list, HBox HBOX1, int i, Runnable onFinished) {
         int length = list.size();
 
         if (i < length) {
@@ -105,18 +109,20 @@ public class InsertionSort implements Algos {
                 int finalJ = j;
                 SwapAnimation(list, j, j - 1, HBOX1, () -> {
                     PauseTransition pause = new PauseTransition(Duration.millis(5));
-                    pause.setOnFinished(event -> InsertionSortStep(list, HBOX1, finalJ - 1));
+                    pause.setOnFinished(event -> InsertionSortStep(list, HBOX1, finalJ - 1, onFinished));
                     pause.play();
                 });
             } else {
                 PauseTransition pause = new PauseTransition(Duration.millis(5));
-                pause.setOnFinished(event -> InsertionSortStep(list, HBOX1, i + 1));
+                pause.setOnFinished(event -> InsertionSortStep(list, HBOX1, i + 1, onFinished));
                 pause.play();
+            }
+        } else {
+            if (onFinished != null) {
+                onFinished.run();
             }
         }
     }
-
-
 
     public void SetSpeed(double inputspeed ){
 

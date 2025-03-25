@@ -24,20 +24,6 @@ public class selectionSort implements Algos {
 
 
 
-
-
-
-
-
-    @Override
-    public int indexLowest() {
-        return 0;
-    }
-
-
-
-
-
     public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
         int length = dataset.size();
 
@@ -100,40 +86,47 @@ public class selectionSort implements Algos {
 
 
 
-    private void SelectionSortStep(ArrayList<Rectangle> list, HBox HBOX1, int i, int j, int minIndex) {
+    private void SelectionSortStep(ArrayList<Rectangle> list, HBox HBOX1, int i, int j, int minIndex, Runnable onFinished) {
         int length = list.size();
 
-        if (i < length - 1) { //Checks if all the rectangles
-            if (j < length) { // Inner loop condition
+        if (i < length - 1) {
+            if (j < length) {
                 if (list.get(j).getHeight() < list.get(minIndex).getHeight()) {
-                    minIndex = j; // Update minIndex if a smaller element is found
+                    minIndex = j;
                 }
                 PauseTransition pause = new PauseTransition(Duration.millis(5));
                 int finalMinIndex = minIndex;
-                pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i, j + 1, finalMinIndex));
+                pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i, j + 1, finalMinIndex, onFinished)); // Pass onFinished
                 pause.play();
-            } else { // Inner loop finished, perform swap
-                if (minIndex != i) { // Only swap if minIndex has changed
+            } else {
+                if (minIndex != i) {
                     SwapAnimation(list, i, minIndex, HBOX1, () -> {
                         PauseTransition pause = new PauseTransition(Duration.millis(5));
-                        pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i + 1, i + 2, i + 1));
+                        pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i + 1, i + 2, i + 1, onFinished)); // Pass onFinished
                         pause.play();
                     });
-                } else { // No swap needed
+                } else {
                     PauseTransition pause = new PauseTransition(Duration.millis(10));
-                    pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i + 1, i + 2, i + 1));
+                    pause.setOnFinished(event -> SelectionSortStep(list, HBOX1, i + 1, i + 2, i + 1, onFinished)); // Pass onFinished
                     pause.play();
                 }
+            }
+        } else {
+            if (onFinished != null) {
+                onFinished.run(); // Call onFinished when sorting is complete
             }
         }
     }
 
 
-
     public void Selectionrect(ArrayList<Rectangle> list, HBox HBOX1) {
-        SelectionSortStep(list, HBOX1, 0, 1, 0);
+        long startTime = System.nanoTime();
+        SelectionSortStep(list, HBOX1, 0, 1, 0, () -> { // Pass Runnable
+            long endTime = System.nanoTime();
+            long executionTime = (endTime - startTime) / 1000000;
+            System.out.println("Selection Sort takes " + executionTime + " ms to execute." + " " + "Big O =  O(n²)");
+        });
     }
-
 
     public void SetSpeed(double inputspeed ){
 

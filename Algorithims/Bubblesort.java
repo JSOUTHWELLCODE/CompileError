@@ -16,39 +16,42 @@ public class Bubblesort implements Algos {
     private double speed = 0.25;
 
 
-
-    private boolean AnimationRunning;
-
-    public void Bubblerect(ArrayList<Rectangle> list, HBox HBOX1) {
-        int n = list.size();
-        bubbleSortStep(list, HBOX1, 0, 0);
+    public void BubbleRect(ArrayList<Rectangle> list, HBox HBOX1) {
+        long startTime = System.nanoTime();
+        BubbleSortStep(list, HBOX1, list.size() - 1, 0, () -> {
+            long endTime = System.nanoTime();
+            long executionTime = (endTime - startTime) / 1000000;
+            System.out.println("Bubble Sort takes " + executionTime + " ms to execute." + "BIG O = O(n²)");
+        });
     }
 
-    private void bubbleSortStep(ArrayList<Rectangle> list, HBox HBOX1, int i, int j) {
-        if (i < list.size() - 1) {
-            if (j < list.size() - i - 1) {
-                //If the hieght of the left rectangle is bigger than the right swap them
-                if (list.get(j).getHeight() > list.get(j + 1).getHeight()) {
-                    SwapAnimation(list, j, j + 1, HBOX1, () -> {
-                        PauseTransition pause = new PauseTransition(Duration.millis(10));
-                        pause.setOnFinished(event -> bubbleSortStep(list, HBOX1, i, j + 1));
+    private void BubbleSortStep(ArrayList<Rectangle> list, HBox HBOX1, int n, int i, Runnable onFinished) {
+        if (n > 0) {
+            if (i < n) {
+                if (list.get(i).getHeight() > list.get(i + 1).getHeight()) {
+                    SwapAnimation(list, i, i + 1, HBOX1, () -> {
+                        PauseTransition pause = new PauseTransition(Duration.millis(5));
+                        pause.setOnFinished(event -> BubbleSortStep(list, HBOX1, n, i + 1, onFinished));
                         pause.play();
                     });
-
-
-
-
-
                 } else {
-                    PauseTransition pause = new PauseTransition(Duration.millis(10));
-                    pause.setOnFinished(event -> bubbleSortStep(list, HBOX1, i, j + 1));
+                    PauseTransition pause = new PauseTransition(Duration.millis(5));
+                    pause.setOnFinished(event -> BubbleSortStep(list, HBOX1, n, i + 1, onFinished));
                     pause.play();
                 }
             } else {
-                bubbleSortStep(list, HBOX1, i + 1, 0);
+                PauseTransition pause = new PauseTransition(Duration.millis(10));
+                pause.setOnFinished(event -> BubbleSortStep(list, HBOX1, n - 1, 0, onFinished));
+                pause.play();
+            }
+        } else {
+            if (onFinished != null) {
+                onFinished.run();
             }
         }
     }
+
+
 
     public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) {
 
@@ -101,10 +104,7 @@ public class Bubblesort implements Algos {
 
     }
 
-    @Override
-    public int indexLowest() {
-        return 0;
-    }
+
 
 
     @Override
