@@ -157,10 +157,11 @@ public class Controller implements Initializable {
 
 
         imageMap = new HashMap<String, String>();
-        imageMap.put("Bubble Sort", "/Images/Bubble sort algorithim.png");
+        imageMap.put("Bubble Sort", "/Images/Bubble.png");
         imageMap.put("Insertion Sort", "/Images/InsertionSort.png");
         imageMap.put("Selection Sort", "/Images/SelectionSort.png");
         imageMap.put("Quick Sort", "/Images/QuickSort.png");
+        imageMap.put("Merge Sort", "/Images/MergeSort.png" );
 
 
 

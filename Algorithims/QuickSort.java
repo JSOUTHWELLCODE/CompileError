@@ -83,10 +83,7 @@ public class QuickSort implements Algos {
 
 
 
-    @Override
-    public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
-        return null;
-    }
+
 
     public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) { // Method to animate the swap
         Rectangle rectI = list.get(i); // Gets the rectangle at index i

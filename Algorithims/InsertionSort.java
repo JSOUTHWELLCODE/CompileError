@@ -23,10 +23,8 @@ public class InsertionSort implements Algos {
 
 
 
-    @Override
-    public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
-        return null;
-    }
+
+
 
     @Override
     public void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished) {

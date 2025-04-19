@@ -23,13 +23,6 @@ public class MergeSort implements Algos {
     }
 
 
-
-    @Override
-    public ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset) {
-        return null;
-    }
-
-
     public void MergeSortRect(ArrayList<Rectangle> list, HBox HBOX1) {
         long startTime = System.nanoTime();
         mergeSortStep(list, HBOX1, 0, list.size() - 1, () -> {
@@ -150,13 +143,28 @@ public class MergeSort implements Algos {
 
     }
 
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

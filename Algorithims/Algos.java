@@ -12,7 +12,6 @@ public interface Algos {
 
 
 
-    ArrayList<Integer> SelectionSort(ArrayList<Integer> dataset);
 
     void SwapAnimation(ArrayList<Rectangle> list, int i, int j, HBox HBOX1, Runnable onFinished);
 
